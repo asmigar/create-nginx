@@ -49,6 +49,34 @@ resource "aws_security_group" "allow_ssh" {
   depends_on = [terraform_data.my_ip]
 }
 
+resource "aws_security_group" "priv_instance" {
+  name        = "allow_ssh_backend"
+  description = "Allow SSH inbound traffic"
+  vpc_id      = aws_vpc.main.id
+
+  ingress {
+    description = "ssh"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = [aws_vpc.main.cidr_block]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 65535
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+
+  }
+
+  tags = {
+    Name = "allow_ssh_backend"
+  }
+
+}
+
 
 
 resource "tls_private_key" "this" {
@@ -86,5 +114,23 @@ resource "aws_instance" "nginx" {
 		yum install nginx python -y
         systemctl start nginx
 		EOT
+}
+
+resource "aws_instance" "backend" {
+  ami           = "ami-0c101f26f147fa7fd"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "backend"
+  }
+
+  vpc_security_group_ids = [aws_security_group.priv_instance.id]
+  subnet_id              = aws_subnet.private.id
+  key_name               = aws_key_pair.this.key_name
+#  user_data              = <<-EOT
+#		#!/bin/bash
+#		yum install nginx python -y
+#        systemctl start nginx
+#		EOT
 }
 
