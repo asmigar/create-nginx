@@ -34,7 +34,7 @@ resource "aws_route_table" "public_custom_route_table" {
 
 
 resource "aws_subnet" "public" {
-  count                   = 2
+  count                   = 4
   vpc_id                  = aws_vpc.main.id
   cidr_block              = var.public_subnet_cidr_block[count.index]
   availability_zone       = data.aws_availability_zones.available.names[count.index]
@@ -46,7 +46,7 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_route_table_association" "public_crt_public_subnet" {
-  count          = 2
+  count          = 4
   subnet_id      = aws_subnet.public[count.index].id
   route_table_id = aws_route_table.public_custom_route_table.id
 }
