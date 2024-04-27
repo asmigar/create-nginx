@@ -70,7 +70,7 @@ resource "aws_key_pair" "this" {
 }
 
 resource "aws_instance" "nginx" {
-  count         = 4
+  count         = 2
   ami           = "ami-0c101f26f147fa7fd"
   instance_type = "t2.micro"
 
