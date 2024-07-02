@@ -57,6 +57,7 @@ jobs:
           audience: sts.amazonaws.com
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/GithubAction
-      - run: cd infra;terraform init -backend-config="bucket=$STATE_BUCKET";terraform apply -auto-approve
+      - run: cd infra;terraform init -backend-config="bucket=$STATE_BUCKET";terraform destroy -auto-approve
+      # - run: cd infra;terraform init -backend-config="bucket=$STATE_BUCKET";terraform apply -auto-approve
   
 
