@@ -1,28 +1,7 @@
-resource "terraform_data" "my_ip" {
-  triggers_replace = timestamp()
-
-  provisioner "local-exec" {
-    command = "curl -4 ifconfig.me > /tmp/my_ip.txt"
-  }
-}
-
-data "local_file" "my-ip" {
-  filename   = "/tmp/my_ip.txt"
-  depends_on = [terraform_data.my_ip]
-}
-
 resource "aws_security_group" "allow_ssh" {
   name        = "allow_tls"
   description = "Allow TLS inbound traffic"
   vpc_id      = aws_vpc.main.id
-
-  ingress {
-    description = "ssh"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["${data.local_file.my-ip.content}/32"]
-  }
 
   ingress {
     description     = "lb"
@@ -42,8 +21,6 @@ resource "aws_security_group" "allow_ssh" {
   }
 
   tags = {
-    Name = "allow_ssh_nginx"
+    Name = "nginx"
   }
-
-  depends_on = [terraform_data.my_ip]
 }
