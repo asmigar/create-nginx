@@ -23,7 +23,6 @@ jobs:
 
   terraform_plan:
     runs-on: ubuntu-latest
-    environment: dev
     permissions:
       id-token: write
       contents: read
@@ -39,3 +38,25 @@ jobs:
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/GithubAction
       - run: cd infra;terraform init -backend-config="bucket=$STATE_BUCKET";terraform plan
+  
+
+  terraform_apply:
+    runs-on: ubuntu-latest
+    environment: dev
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      STATE_BUCKET: ${{ vars.STATE_BUCKET }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          audience: sts.amazonaws.com
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/GithubAction
+      - run: cd infra;terraform init -backend-config="bucket=$STATE_BUCKET";terraform apply -auto-approve
+  
+
