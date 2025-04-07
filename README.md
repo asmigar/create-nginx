@@ -1,4 +1,3 @@
-
 # What Is This?
 A simple terraform project to create an EC2 instance with nginx and python installed. Also, generates ssh key to access the instance.  
 
