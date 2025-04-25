@@ -47,8 +47,8 @@ cd remote_state; terraform init; terraform apply --auto-approve
 Outputs:
 
 terraform_state_bucket_name = [
-"asmigar-<env1>create-nginx-terraform-state-<aws_account_id>", 
-"asmigar-<env2>create-nginx-terraform-state-[aws_account_id]"
+"asmigar-<env1>-create-nginx-terraform-state-<aws_account_id>", 
+"asmigar-<env2>-create-nginx-terraform-state-<aws_account_id>"
 ```
 
 ## Create Infra
