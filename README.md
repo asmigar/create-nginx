@@ -22,9 +22,9 @@ $ aws iam list-users --profile asmigar
     "Users": [
         {
             "Path": "/",
-            "UserName": "SagarM",
+            "UserName": "wtf",
             "UserId": "AIDA5FTY6HTRVAX2LBERT",
-            "Arn": "arn:aws:iam::905417997539:user/SagarM",
+            "Arn": "arn:aws:iam::905417997539:user/wtf",
             "CreateDate": "2024-03-26T11:11:14+00:00",
             "PasswordLastUsed": "2024-04-01T04:59:30+00:00"
         }
@@ -51,6 +51,10 @@ terraform_state_bucket_name = [
 "asmigar-<env2>-create-nginx-terraform-state-<aws_account_id>"
 ```
 
+## Create IAM role for terraform execution
+You would need to create a terraform role: `GithubAction` and provide the assumerole access to your cli user you created in step 1 of pre-requisites. This is done in order to have seamless Terragrunt execution both from local and Github Action. 
+More details [here](https://terragrunt.gruntwork.io/docs/features/aws-authentication/#configuring-terragrunt-to-assume-an-iam-role)
+
 ## Create Infra
 1. Run below command to create EC2 instance. This will even output the ssh command to access the instance.
 ```bash
@@ -58,10 +62,12 @@ cd infra/dev; terragrunt init; terragrunt apply --auto-approve
 ```
 
 ## CI/CD
-Github Actions are configured to apply terraform code. You would need to create environments in the GitHub repo and create some secrets needed in workflow `tf-ci.yml
+1. [Add GitHub OIDC provider to AWS IAM](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services#adding-the-identity-provider-to-aws)
+2. [Configuring the GitHub Action role and trust policy](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services#configuring-the-role-and-trust-policy)
+3. Create environments in the GitHub repo and secrets. Secrets needed in workflow can be checked in `.github/workflows/tf-ci.yml` file.
 
-## TODO
-- Configure terragrunt to run on local without making much changes to code. Possible solution: https://terragrunt.gruntwork.io/docs/features/aws-authentication/#configuring-terragrunt-to-assume-an-iam-role 
+## TODO 
+Remove account number hardcoded in `infra/dev/terragrunt.hcl` file. 
 
 ## Report Bug
 To raise issue/bug click [here](https://github.com/asmigar/create-nginx/issues/new).
