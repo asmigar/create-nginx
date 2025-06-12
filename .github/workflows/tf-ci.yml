@@ -13,6 +13,10 @@ permissions:
   id-token: write
   contents: read
 
+env:
+  AWS_REGION: us-east-1
+  IAM_ROLE: GithubAction
+
 jobs:
   format:
     runs-on: ubuntu-latest
@@ -22,8 +26,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           audience: sts.amazonaws.com
-          aws-region: us-east-1
-          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/GithubAction
+          aws-region: ${{env.AWS_REGION}}
+          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/${{env.IAM_ROLE}}
       - name: Format
         uses: gruntwork-io/terragrunt-action@v2
         with:
@@ -40,8 +44,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           audience: sts.amazonaws.com
-          aws-region: us-east-1
-          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/GithubAction
+          aws-region: ${{env.AWS_REGION}}
+          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/${{env.IAM_ROLE}}
       - name: Validate
         uses: gruntwork-io/terragrunt-action@v2
         with:
@@ -61,8 +65,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           audience: sts.amazonaws.com
-          aws-region: us-east-1
-          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/GithubAction
+          aws-region: ${{env.AWS_REGION}}
+          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/${{env.IAM_ROLE}}
       - name: Plan
         uses: gruntwork-io/terragrunt-action@v2
         with:
@@ -82,8 +86,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           audience: sts.amazonaws.com
-          aws-region: us-east-1
-          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/GithubAction
+          aws-region: ${{env.AWS_REGION}}
+          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/${{env.IAM_ROLE}}
       - name: Apply
         uses: gruntwork-io/terragrunt-action@v2
         with:
@@ -104,8 +108,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           audience: sts.amazonaws.com
-          aws-region: us-east-1
-          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/GithubAction
+          aws-region: ${{env.AWS_REGION}}
+          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/${{env.IAM_ROLE}}
       - name: Plan
         uses: gruntwork-io/terragrunt-action@v2
         with:
@@ -125,8 +129,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           audience: sts.amazonaws.com
-          aws-region: us-east-1
-          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/GithubAction
+          aws-region: ${{env.AWS_REGION}}
+          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/${{env.IAM_ROLE}}
       - name: Apply
         uses: gruntwork-io/terragrunt-action@v2
         with:
