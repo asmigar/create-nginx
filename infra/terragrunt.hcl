@@ -1,3 +1,5 @@
+iam_role = "arn:aws:iam::${get_aws_account_id()}:role/GithubAction"
+
 generate "backend" {
   path      = "remote_backend.tf"
   if_exists = "overwrite_terragrunt"

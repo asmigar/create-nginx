@@ -9,5 +9,3 @@ include "root" {
 inputs = {
   env = "dev"
 }
-
-iam_role = "arn:aws:iam::${get_aws_account_id()}:role/GithubAction"
