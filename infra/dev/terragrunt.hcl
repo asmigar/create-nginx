@@ -10,4 +10,4 @@ inputs = {
   env = "dev"
 }
 
-iam_role = "arn:aws:iam::303946138843:role/GithubAction"
+iam_role = "arn:aws:iam::${get_aws_account_id()}:role/GithubAction"
