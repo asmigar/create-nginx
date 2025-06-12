@@ -67,7 +67,7 @@ cd infra/dev; terragrunt init; terragrunt apply --auto-approve
 3. Create environments in the GitHub repo and secrets. Secrets needed in workflow can be checked in `.github/workflows/tf-ci.yml` file.
 
 ## TODO 
-- Remove duplicate aws auth steps in github action workflow jobs.  
+- Remove duplicate aws auth steps in github action workflow jobs. More details [here](https://docs.github.com/en/actions/sharing-automations/creating-actions/creating-a-composite-action#creating-a-composite-action-within-the-same-repository)  
 
 ## Report Bug
 To raise issue/bug click [here](https://github.com/asmigar/create-nginx/issues/new).
