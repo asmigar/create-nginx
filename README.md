@@ -67,7 +67,7 @@ cd infra/dev; terragrunt init; terragrunt apply --auto-approve
 3. Create environments in the GitHub repo and secrets. Secrets needed in workflow can be checked in `.github/workflows/tf-ci.yml` file.
 
 ## TODO 
-Remove account number hardcoded in `infra/dev/terragrunt.hcl` file. 
+- Remove duplicate aws auth steps in github action workflow jobs.  
 
 ## Report Bug
 To raise issue/bug click [here](https://github.com/asmigar/create-nginx/issues/new).
