@@ -60,6 +60,9 @@ cd infra/dev; terragrunt init; terragrunt apply --auto-approve
 ## CI/CD
 Github Actions are configured to apply terraform code. You would need to create environments in the GitHub repo and create some secrets needed in workflow `tf-ci.yml
 
+## TODO
+- Configure terragrunt to run on local without making much changes to code. Possible solution: https://terragrunt.gruntwork.io/docs/features/aws-authentication/#configuring-terragrunt-to-assume-an-iam-role 
+
 ## Report Bug
 To raise issue/bug click [here](https://github.com/asmigar/create-nginx/issues/new).
 
