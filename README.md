@@ -66,6 +66,9 @@ cd infra/dev; terragrunt init; terragrunt apply --auto-approve
 2. [Configuring the GitHub Action role and trust policy](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services#configuring-the-role-and-trust-policy)
 3. Create environments in the GitHub repo and secrets. Secrets needed in workflow can be checked in `.github/workflows/tf-ci.yml` file.
 
+## TODO
+- Create `GithubAction` role as part of bootstrap process through terraform. This repo requires iam role created upfront for CI/CD and even local execution.  
+
 ## Report Bug
 To raise issue/bug click [here](https://github.com/asmigar/create-nginx/issues/new).
 
