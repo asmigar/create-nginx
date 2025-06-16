@@ -1,13 +1,3 @@
-provider "aws" {
-  region  = "us-east-1"
-  profile = "asmigar"
-  default_tags {
-    tags = {
-      Organisation = "Asmigar"
-    }
-  }
-}
-
 data "aws_caller_identity" "current" {}
 
 resource "aws_s3_bucket" "terraform_state" {
@@ -51,3 +41,5 @@ resource "aws_dynamodb_table" "terraform_locks" {
     type = "S"
   }
 }
+
+
