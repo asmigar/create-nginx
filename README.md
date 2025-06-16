@@ -52,10 +52,6 @@ terraform_state_bucket_name = [
 "asmigar-<env2>-create-nginx-terraform-state-<aws_account_id>"
 ```
 
-## Create IAM role for terraform execution
-You would need to create a terraform role: `GithubAction` and provide the assumerole access to your cli user you created in step 1 of pre-requisites. This is done in order to have seamless Terragrunt execution both from local and Github Action. 
-More details [here](https://terragrunt.gruntwork.io/docs/features/aws-authentication/#configuring-terragrunt-to-assume-an-iam-role)
-
 ## Create Infra
 1. Run below command to create EC2 instance. This will even output the ssh command to access the instance.
 ```bash
