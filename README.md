@@ -39,7 +39,7 @@ Terraform keeps all the info about the resources in a state file. Rather than ke
 To learn more read the docs [here](https://developer.hashicorp.com/terraform/language/settings/backends/s3). 
 This terraform project also creates IAM roles required for running the `infra/dev` and `infra/prod` terragrunt projects.
 
-1. Run below terraform command to create remote state bucket on your AWS account. This will also prompt for your aws cli user mentioned in [Pre-requisties](#pre-requisites)  
+Run below terraform command to create remote state bucket on your AWS account. This will also prompt for your aws cli user mentioned in [Pre-requisties](#pre-requisites)  
 ```bash
 cd remote_state; terraform init; terraform apply --auto-approve
 ```
@@ -54,7 +54,7 @@ terraform_state_bucket_name = [
 ```
 
 ## Create Infra
-1. Run below command to create EC2 instance. This will prompt for state bucket name. Provide the bucket name obtained from [Create Remote State](#create-remote-state)  This will even output the ssh command to access the instance.
+Run below command to create EC2 instance. This will prompt for state bucket name. Provide the bucket name obtained from [Create Remote State](#create-remote-state)  This will even output the ssh command to access the instance.
 ```bash
 cd infra/dev; terragrunt init; terragrunt apply --auto-approve
 ```
