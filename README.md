@@ -43,7 +43,8 @@ This terraform project also creates IAM roles required for running the `infra/de
 ```bash
 cd remote_state; terraform init; terraform apply --auto-approve
 ```
-2. The above command will output the s3 bucket name. Copy the s3 bucket name. For example, 
+
+The above command will output the s3 bucket name. These will be needed later. For example, 
 ```bash
 Outputs:
 
@@ -53,7 +54,7 @@ terraform_state_bucket_name = [
 ```
 
 ## Create Infra
-1. Run below command to create EC2 instance. This will even output the ssh command to access the instance.
+1. Run below command to create EC2 instance. This will prompt for state bucket name. Provide the bucket name obtained from [Create Remote State](#create-remote-state)  This will even output the ssh command to access the instance.
 ```bash
 cd infra/dev; terragrunt init; terragrunt apply --auto-approve
 ```
