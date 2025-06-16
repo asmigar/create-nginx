@@ -32,7 +32,7 @@ data "aws_iam_policy_document" "applier" {
     actions = ["sts:AssumeRole"]
 
     principals {
-      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/wtf",
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/${var.cli_user}",
                     aws_iam_role.github_action.arn ]
       type = "AWS"
     }

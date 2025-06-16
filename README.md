@@ -35,10 +35,11 @@ $ aws iam list-users --profile asmigar
 7. Install Terragrunt's latest version from [here](https://terragrunt.gruntwork.io/docs/getting-started/install/)
 
 ## Create Remote State
-Terraform keeps all the info about the resources in a state file. Rather than keeping it on local disk, we store it on S3 bucket.
-To learn more read the docs [here](https://developer.hashicorp.com/terraform/language/settings/backends/s3)
+Terraform keeps all the info about the resources in a state file. Rather than keeping it on local disk, we store it on S3 bucket. 
+To learn more read the docs [here](https://developer.hashicorp.com/terraform/language/settings/backends/s3). 
+This terraform project also creates IAM roles required for running the `infra/dev` and `infra/prod` terragrunt projects.
 
-1. Run below terraform command to create remote state bucket on your AWS account.
+1. Run below terraform command to create remote state bucket on your AWS account. This will also prompt for your aws cli user mentioned in [Pre-requisties](##pre-requisites)  
 ```bash
 cd remote_state; terraform init; terraform apply --auto-approve
 ```
@@ -62,9 +63,7 @@ cd infra/dev; terragrunt init; terragrunt apply --auto-approve
 ```
 
 ## CI/CD
-1. [Add GitHub OIDC provider to AWS IAM](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services#adding-the-identity-provider-to-aws)
-2. [Configuring the GitHub Action role and trust policy](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services#configuring-the-role-and-trust-policy)
-3. Create environments in the GitHub repo and secrets. Secrets needed in workflow can be checked in `.github/workflows/tf-ci.yml` file.
+1. Create environments in the GitHub repo and secrets. Secrets needed in workflow can be checked in `.github/workflows/tf-ci.yml` file.
 
 ## Report Bug
 To raise issue/bug click [here](https://github.com/asmigar/create-nginx/issues/new).
