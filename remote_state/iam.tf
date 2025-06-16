@@ -1,15 +1,5 @@
 data "aws_iam_policy_document" "github_action" {
   statement {
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/GithubAction",
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/wtf"]
-      type = "AWS"
-    }
-  }
-
-  statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
 
     principals {
@@ -31,10 +21,27 @@ data "aws_iam_policy_document" "github_action" {
   }
 }
 
-
 resource "aws_iam_role" "github_action" {
-  name                = "GithubAction"
-  assume_role_policy  = data.aws_iam_policy_document.github_action.json
+  name = "github_action"
+  assume_role_policy = data.aws_iam_policy_document.github_action.json
+}
+
+
+data "aws_iam_policy_document" "applier" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/wtf",
+                    aws_iam_role.github_action.arn ]
+      type = "AWS"
+    }
+  }
+}
+
+resource "aws_iam_role" "applier" {
+  name                = "applier"
+  assume_role_policy  = data.aws_iam_policy_document.applier.json
   managed_policy_arns = ["arn:aws:iam::aws:policy/AdministratorAccess"]
 }
 

@@ -1,4 +1,4 @@
-iam_role = "arn:aws:iam::${get_aws_account_id()}:role/GithubAction"
+iam_role = "arn:aws:iam::${get_aws_account_id()}:role/applier"
 
 generate "backend" {
   path      = "remote_backend.tf"
