@@ -54,7 +54,7 @@ terraform_state_bucket_name = [
 ```
 
 ## Create Infra
-Run below command to create EC2 instance. This will prompt for state bucket name. Provide the bucket name obtained from [Create Remote State](#create-remote-state)  This will even output the ssh command to access the instance.
+Run below command to create EC2 instance. This will prompt for state bucket name. Provide the bucket name obtained from [Create Remote State](#create-remote-state). This will even output the ssh command to access the instance.
 ```bash
 cd infra/dev; terragrunt init; terragrunt apply --auto-approve
 ```
