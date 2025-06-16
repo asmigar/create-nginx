@@ -15,7 +15,7 @@ permissions:
 
 env:
   AWS_REGION: us-east-1
-  IAM_ROLE: GithubAction
+  IAM_ROLE: GitHubAction
 
 jobs:
   format:
