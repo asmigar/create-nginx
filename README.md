@@ -1,7 +1,6 @@
 # What Is This?
 A simple terraform project to create an EC2 instance with nginx and python installed. Also, generates ssh key to access the instance.  
 
-
 # How To?
 ## Pre-requisites
 1. Create an IAM user with Administrator access [here](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/users)
