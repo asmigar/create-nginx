@@ -59,7 +59,7 @@ cd infra/dev; terragrunt init; terragrunt apply --auto-approve
 ```
 
 ## CI/CD
-1. Create environments in the GitHub repo and secrets. Secrets needed in workflow can be checked in `.github/workflows/tf-ci.yml` file.
+1. Fork this repo. In your forked repo create environments and secrets. Secrets needed in workflow can be checked in `.github/workflows/tf-ci.yml` file.
 
 ## Report Bug
 To raise issue/bug click [here](https://github.com/asmigar/create-nginx/issues/new).
