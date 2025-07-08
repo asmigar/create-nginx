@@ -9,6 +9,9 @@ on:
     - feature/*
     tags:
       - '*'
+    paths-ignore:
+      - 'README.md'
+      - 'remote_state/**'
 permissions:
   id-token: write
   contents: read
