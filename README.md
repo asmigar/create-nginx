@@ -58,6 +58,12 @@ Run below command to create EC2 instance. This will prompt for state bucket name
 cd infra/dev; terragrunt init; terragrunt apply --auto-approve
 ```
 
+## Deleting Infra
+Once you are done with created infra resources, you would like to delete them to save your AWS bills.
+```shell
+cd infra/dev; terragrunt init; terragrunt destroy --auto-approve
+```
+
 ## CI/CD
 1. Fork this repo. In your forked repo create environments and secrets. Secrets needed in workflow can be checked in `.github/workflows/tf-ci.yml` file.
 
