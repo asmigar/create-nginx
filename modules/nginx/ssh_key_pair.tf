@@ -9,7 +9,7 @@ resource "aws_key_pair" "this" {
 }
 
 resource "local_sensitive_file" "ssh_private_key" {
-  content  = tls_private_key.this.private_key_openssh
-  filename = pathexpand("~/.ssh/${aws_key_pair.this.key_name}.pem")
+  content         = tls_private_key.this.private_key_openssh
+  filename        = pathexpand("~/.ssh/${aws_key_pair.this.key_name}.pem")
   file_permission = "0400"
 }
