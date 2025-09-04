@@ -23,9 +23,29 @@ resource "aws_cloudwatch_metric_alarm" "scale_up" {
   }
 }
 
+data "aws_ami" "amazon_linux_2" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*-gp2"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+}
+
 resource "aws_launch_template" "nginx" {
   name_prefix   = "nginx"
-  image_id      = "ami-0c101f26f147fa7fd"
+  image_id      = data.aws_ami.amazon_linux_2.id
   instance_type = "t2.micro"
 
   vpc_security_group_ids = [aws_security_group.allow_ssh.id]
