@@ -39,14 +39,14 @@ data "aws_ami" "amazon_linux_2" {
 
   filter {
     name   = "architecture"
-    values = ["x86_64"]
+    values = ["arm64"]
   }
 }
 
 resource "aws_launch_template" "nginx" {
   name_prefix   = "nginx"
   image_id      = data.aws_ami.amazon_linux_2.id
-  instance_type = "t2.micro"
+  instance_type = "t4g.nano"
 
   vpc_security_group_ids = [aws_security_group.allow_ssh.id]
   key_name               = aws_key_pair.this.key_name
