@@ -2,11 +2,11 @@ data "aws_caller_identity" "current" {}
 
 resource "aws_s3_bucket" "terraform_state" {
   count  = 2
-  bucket = "${var.organisation}-${var.envs[count.index]}-create-nginx-terraform-state-${data.aws_caller_identity.current.account_id}"
+  bucket = "${var.organisation}-${var.envs[count.index]}-create-nginx-terraform-state"
 
   # Prevent accidental deletion of this S3 bucket
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
