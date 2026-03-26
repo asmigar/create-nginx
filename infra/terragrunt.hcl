@@ -6,7 +6,7 @@ generate "backend" {
   contents = <<EOF
 terraform {
   backend "s3" {
-    bucket         = "asmigar-${path_relative_to_include()}-create-nginx-terraform-state"
+    bucket         = "asmigar-${path_relative_to_include()}-create-nginx-tfstate-${get_aws_account_id()}-us-east-1-an"
     key            = "terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
