@@ -1,3 +1,13 @@
+resource "aws_iam_openid_connect_provider" "github" {
+  url = "https://token.actions.githubusercontent.com"
+
+  client_id_list = [
+    "sts.amazonaws.com"
+  ]
+
+  thumbprint_list = ["1b511abead59c6ce207077c0bf0e0043b1382612"]
+}
+
 data "aws_iam_policy_document" "github_action" {
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
@@ -42,16 +52,10 @@ data "aws_iam_policy_document" "applier" {
 resource "aws_iam_role" "applier" {
   name                = "applier"
   assume_role_policy  = data.aws_iam_policy_document.applier.json
-  managed_policy_arns = ["arn:aws:iam::aws:policy/AdministratorAccess"]
 }
 
-resource "aws_iam_openid_connect_provider" "github" {
-  url = "https://token.actions.githubusercontent.com"
-
-  client_id_list = [
-    "sts.amazonaws.com"
-  ]
-
-  thumbprint_list = ["1b511abead59c6ce207077c0bf0e0043b1382612"]
+resource "aws_iam_role_policy_attachment" "administrator" {
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+  role       = aws_iam_role.applier.name
 }
 
