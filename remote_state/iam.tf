@@ -32,7 +32,7 @@ data "aws_iam_policy_document" "github_action" {
 }
 
 resource "aws_iam_role" "github_action" {
-  name = "GitHubAction"
+  name               = "GitHubAction"
   assume_role_policy = data.aws_iam_policy_document.github_action.json
 }
 
@@ -43,15 +43,15 @@ data "aws_iam_policy_document" "applier" {
 
     principals {
       identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/${var.cli_user}",
-                    aws_iam_role.github_action.arn ]
+      aws_iam_role.github_action.arn]
       type = "AWS"
     }
   }
 }
 
 resource "aws_iam_role" "applier" {
-  name                = "applier"
-  assume_role_policy  = data.aws_iam_policy_document.applier.json
+  name               = "applier"
+  assume_role_policy = data.aws_iam_policy_document.applier.json
 }
 
 resource "aws_iam_role_policy_attachment" "administrator" {

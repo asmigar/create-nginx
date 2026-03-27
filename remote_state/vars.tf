@@ -11,6 +11,6 @@ variable "envs" {
 }
 
 variable "cli_user" {
-  type = string
+  type        = string
   description = "the admin cli user you created mentioned in prereuisites of README.md"
 }
