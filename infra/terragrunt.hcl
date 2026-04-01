@@ -1,19 +1,18 @@
 iam_role = "arn:aws:iam::${get_aws_account_id()}:role/applier"
 
-generate "backend" {
-  path      = "remote_backend.tf"
-  if_exists = "overwrite_terragrunt"
-  contents = <<EOF
-terraform {
-  backend "s3" {
-    bucket         = "asmigar-${path_relative_to_include()}-create-nginx-tfstate-${get_aws_account_id()}-us-east-1-an"
-    key            = "terraform.tfstate"
+remote_state {
+  generate = {
+    path = "remote_backend.tf"
+    if_exists = "overwrite_terragrunt"
+  }
+  backend = "s3"
+  config = {
+    bucket = "asmigar-${path_relative_to_include()}-create-nginx-tfstate-${get_aws_account_id()}"
+    key = "terraform.tfstate"
     region         = "us-east-1"
-    encrypt        = true
+    encrypt = true
     use_lockfile = true
   }
-}
-EOF
 }
 
 generate "provider" {
